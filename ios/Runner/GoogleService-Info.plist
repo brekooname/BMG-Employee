@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>938193113605-noit3i28giraehihi6h57vvb5lbo7scm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.938193113605-noit3i28giraehihi6h57vvb5lbo7scm</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>938193113605-5b7b1oiao636p2rn13eckbfka7rd4b5f.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBT6o9yOL2eBeLjTMtLcZ6QQ4-ijwQ7bQw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>938193113605</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.MAAK.bmgTimeSheet</string>
+	<key>PROJECT_ID</key>
+	<string>bmgtimesheet</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bmgtimesheet.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:938193113605:ios:31b3fffa8d174884f4c26c</string>
+	<key>DATABASE_URL</key>
+	<string>https://bmgtimesheet-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
