@@ -10,7 +10,7 @@
 .svn/
 migrate_working_dir/
 .env
-firebase.exe
+
 
 # IntelliJ related
 *.iml
@@ -29,6 +29,7 @@ firebase.exe
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+/lib/firebase_options.dart
 .packages
 .pub-cache/
 .pub/

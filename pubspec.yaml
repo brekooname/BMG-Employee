@@ -8,21 +8,26 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
-  cloud_firestore: ^3.4.9
+  build_runner: ^2.3.2
   connectivity_plus: ^2.3.7
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  desktop_window: ^0.4.0
   dio: ^4.0.6
   easy_localization: ^3.0.1
   equatable: ^2.0.5
-  firebase_core: ^1.23.0
-  firebase_core_desktop: ^1.0.2
+  firebase_auth: ^4.1.2
+  firebase_core: ^2.1.1
+  firedart: ^0.9.0+1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_dotenv: ^5.0.2
-  fluttertoast: ^8.0.9
   get_it: ^7.2.0
+  intl: ^0.17.0
+  json_annotation: ^4.7.0
+  json_serializable: ^6.5.4
+  pin_code_fields: ^7.4.0
   shared_preferences: ^2.0.15
 
 dev_dependencies:

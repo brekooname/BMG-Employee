@@ -1,20 +1,15 @@
-
-
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../../../core/useCases/usecase.dart';
 import '../../data/models/user_model.dart';
 import '../entities/user.dart';
-import '../repositories/login_repo.dart';
 
-class LoginUseCaseImpl implements UseCase<User,UserModel>{
-  final LoginRepo loginRepo;
-
-  LoginUseCaseImpl({required this.loginRepo});
-  @override
-  Future<Either<Failure, User>> call(UserModel userModel) {
-   return loginRepo.login(userModel: userModel);
-  }
-  
+abstract class LoginUseCase {
+  Future<Either<Failure, User>> login(UserModel userModel,);
+  Future<Either<Failure, bool>> loginWithPhoneNumber(
+      {required String phoneNumber, required VoidCallback onSuccess});
+  Future<Either<Failure, bool>> verifySMSCode({required String phoneNumber,});
+  Future<bool> logout();
+    Future<Either<Failure, User>> tryRelogin();
 }

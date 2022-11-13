@@ -10,6 +10,7 @@ extension MediaQueryValues on BuildContext {
   double get verticalSpace=>MediaQuery.of(this).size.width*.025;
   double get horizontalSpace=>MediaQuery.of(this).size.width*.025;
   double get paddingAll=>MediaQuery.of(this).size.width*.06;
+  double get paddingAllWindows=>MediaQuery.of(this).size.width*.1;
   double get containerPadding=>MediaQuery.of(this).size.width*.03;
   double get margingAll=>MediaQuery.of(this).size.width*.05;
 }

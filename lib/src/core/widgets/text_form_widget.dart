@@ -51,15 +51,16 @@ class TextFormWidget extends StatelessWidget {
           decoration: InputDecoration(
             // labelText: labelText,
             hintText: hint,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 11, horizontal: 15),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             prefixIcon: prefix,
             suffixIcon: suffix,
             icon: icon,
             labelStyle: Theme.of(context).textTheme.headline5!.copyWith(
                   fontSize: context.fontSizeNormal,
                 ),
+              errorMaxLines: 2,
           ),
         ),
       ],

@@ -3,7 +3,7 @@ import '../../injector_container.dart';
 import 'data/datasources/login_data_source.dart';
 import 'data/repositories/login_repo_impl.dart';
 import 'domain/repositories/login_repo.dart';
-import 'domain/usecases/login_use_case.dart';
+import 'domain/usecases/login_use_case_impl.dart';
 import 'presentation/cubit/login_cubit.dart';
 
 

@@ -9,6 +9,7 @@ import 'core/api/dio_interceptors.dart';
 import 'core/firebase/firebase_firestore_repository.dart';
 import 'features/internet_checker/netword_checker_injection.dart';
 import 'features/login/login_injection.dart';
+import 'features/splash_with_get_version/get_version_injection.dart';
 
 final getIt = GetIt.instance;
 
@@ -16,6 +17,7 @@ Future<void> init() async {
   //!features
   // initQuoteInjection();
   initNetworkCheckerInjection();
+  initGetVersionInjection();
   initLoginInjection();
 
   //!Core

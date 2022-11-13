@@ -1,19 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/entities/user.dart';
+part 'user_model.g.dart';
 
+@JsonSerializable()
 class UserModel extends User {
-
   const UserModel({
-    String? userID,
     required String userCode,
-     String? userName,
+    String? userName,
     String? userEmail,
     required String userPassword,
     String? userGender,
     String? userOffice,
   }) : super(
-          userID: userID,
           userCode: userCode,
           userName: userName,
           userEmail: userEmail,
@@ -22,15 +21,9 @@ class UserModel extends User {
           userOffice: userOffice,
         );
 
-  factory UserModel.fromJson(QueryDocumentSnapshot documentSnapshot) {
-    return UserModel(
-      userID: documentSnapshot.id,
-      userCode: documentSnapshot.get("code"),
-      userName: documentSnapshot.get("name"),
-      userEmail: documentSnapshot.get("email"),
-      userPassword: documentSnapshot.get("password"),
-      userGender: documentSnapshot.get("gender"),
-      userOffice: documentSnapshot.get("office"),
-    );
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+
+  Map<String,dynamic> toJson()=>_$UserModelToJson(this);
+
 }
