@@ -8,7 +8,17 @@ abstract class GetVersionState extends Equatable {
 }
 
 class SplashWithGetVersionInitial extends GetVersionState {}
+
 class GetVersionLoading extends GetVersionState {}
-class GetVersionFailed extends GetVersionState {}
+
+class GetVersionFailed extends GetVersionState {
+  final String message;
+
+  const GetVersionFailed(this.message);
+  @override
+  List<Object> get props => [message];
+}
+
 class VersionIsUpToDate extends GetVersionState {}
+
 class VersionIsFine extends GetVersionState {}

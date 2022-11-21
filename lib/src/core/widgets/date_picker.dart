@@ -7,8 +7,8 @@ class DatePicker {
     DateTime? firstDate,
     DateTime? lastDate,
   }) async {
-    initialDate = DateTime.now();
-    firstDate = DateTime.now();
+    initialDate ??= DateTime.now();
+    firstDate = DateTime.now().subtract(const Duration(days: 60));
     lastDate = DateTime.now().add(const Duration(days: 60));
     final pickedDate = await showDatePicker(
         context: context,
@@ -22,7 +22,7 @@ class DatePicker {
     required BuildContext context,
     TimeOfDay? initialTime,
   }) async {
-    initialTime = TimeOfDay.now();
+    initialTime ??= TimeOfDay.now();
     final pickedTime = await showTimePicker(
         context: context,
         initialTime: initialTime,

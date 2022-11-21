@@ -42,11 +42,22 @@ class _LoginScreenState extends State<LoginScreen> {
     return _isLoginWithPhoneNumber;
   }
 
+  
+  @override
+  void didChangeDependencies() {
+    setState(() {
+      _loading = false;
+    });
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MainScreenPadding(
         children: [
+          const VerticalSizedBox(),
+          const VerticalSizedBox(),
           const CompanyIcon(),
           Container(
             padding: EdgeInsets.all(context.containerPadding),
@@ -133,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           _loading = false;
                         });
-                      } else if (state is LogingSuccess) {
+                      } else if (state is LoginSuccess) {
                         codeController.clear();
                         passwordController.clear();
                         Navigator.of(context)
@@ -153,8 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             phoneNumber:
                                                 '+2${phoneNumberController.text.trim()}',
                                             onSuccess: () =>
-                                                Navigator.of(context)
-                                                    .pushReplacementNamed(
+                                                Navigator.of(context).pushNamed(
                                                   Routes.codeVerificationRoute,
                                                 ));
                                   } else {

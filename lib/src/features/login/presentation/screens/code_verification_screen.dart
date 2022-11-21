@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -22,10 +24,49 @@ class CodeVerificationScreen extends StatefulWidget {
 }
 
 class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
+  late Timer timer;
+  int _start = 30;
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  bool _alreadyResent = false;
+
+  bool get alreadyResent {
+    return _alreadyResent;
+  }
+
   bool _loading = false;
 
   bool get loading {
     return _loading;
+  }
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -34,6 +75,8 @@ class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
       appBar: AppBar(),
       body: MainScreenPadding(
         children: [
+          const VerticalSizedBox(),
+          const VerticalSizedBox(),
           const CompanyIcon(iconSizeFromHeight: .1),
           const VerticalSizedBox(),
           Text(
@@ -75,7 +118,9 @@ class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
                       onPressed: () async {
                         if (smsCode.length == 6) {
                           await BlocProvider.of<LoginCubit>(context)
-                              .verifySMSCode(phoneNumber:'+2${phoneNumberController.text.trim()}');
+                              .verifySMSCode(
+                                  phoneNumber:
+                                      '+2${phoneNumberController.text.trim()}');
                         } else {
                           AppDialogs.appSnackBar(
                               context: context,
@@ -84,6 +129,26 @@ class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
                       });
             },
           ),
+          const VerticalSizedBox(),
+          _start == 0
+              ? TextButton(
+                  onPressed: () async {
+                    await BlocProvider.of<LoginCubit>(context)
+                        .loginWithPhoneNumber(
+                      phoneNumber: '+2${phoneNumberController.text.trim()}',
+                      onSuccess: () => AppDialogs.appSnackBar(
+                          context: context, text: AppStrings.smsCodeSent),
+                    );
+                    setState(() {
+                      _start = 30;
+                      startTimer();
+                    });
+                  },
+                  child: const Text(AppStrings.sendCodeAgain))
+              : Text(
+                  _start.toString(),
+                  style: Theme.of(context).textTheme.headline2,
+                ),
         ],
       ),
     );

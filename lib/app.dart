@@ -5,7 +5,6 @@ import 'src/config/locale/app_localizations_setup.dart';
 import 'src/config/routes/app_routes.dart';
 import 'src/config/themes/app_theme.dart';
 import 'src/core/utils/app_strings.dart';
-import 'src/features/internet_checker/presentation/bloc/network_checker_bloc.dart';
 import 'package:project_template/src/injector_container.dart' as di;
 
 import 'src/features/login/presentation/cubit/login_cubit.dart';
@@ -18,9 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<NetworkCheckerBloc>(
-          create: (context) => di.getIt<NetworkCheckerBloc>(),
-        ),
+        // BlocProvider<NetworkCheckerBloc>(
+        //   create: (context) => di.getIt<NetworkCheckerBloc>(),
+        // ),
         BlocProvider<LoginCubit>(
           create: (context) => di.getIt<LoginCubit>(),
         ),

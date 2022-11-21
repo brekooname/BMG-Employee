@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_template/src/core/shared_models/date_time_model.dart';
 
 import '../../core/utils/app_strings.dart';
-import '../../features/internet_checker/presentation/bloc/network_checker_bloc.dart';
-import '../../features/internet_checker/presentation/screens/no_internet_screen.dart';
+import '../../features/attendance/presentation/cubit/attendance_cubit.dart';
 import '../../features/login/presentation/cubit/login_cubit.dart';
 import '../../features/attendance/presentation/screens/home_screen.dart';
 import '../../features/login/presentation/screens/code_verification_screen.dart';
@@ -23,81 +23,56 @@ class Routes {
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
-    return MaterialPageRoute(
-      builder: (_) => BlocConsumer<NetworkCheckerBloc, NetworkCheckerState>(
-        listener: (context, state) {
-          if (state is NetworkConnectedState) {
-            if (Navigator.canPop(context)) {
-              Navigator.of(context).pop();
-            }
-          } else if (state is NetworkNotConnectedState) {
-            Navigator.of(context).pushNamed(Routes.noInternetRoute);
-          }
-        },
-        builder: (context, state) {
-          switch (routeSettings.name) {
-            case Routes.initialRoute:
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider<GetVersionCubit>(
-                    create: (context) =>
-                        di.getIt<GetVersionCubit>()..shouldUpdate(),
-                  ),
-                  BlocProvider<LoginCubit>(
-                    create: (context) => di.getIt<LoginCubit>(),
-                  ),
-                ],
-                child: const SplashScreen(),
-              );
-            case Routes.loginRoute:
-              return const LoginScreen();
-              case Routes.codeVerificationRoute:
-              return const CodeVerificationScreen();
-            case Routes.homeRoute:
-              return const HomeScreen();
-            case Routes.noInternetRoute:
-            return const NoInternetScreen();
-            default:
-              return undefinedRoute();
-          }
-        },
-      ),
-    );
-    // switch (routeSettings.name) {
-    //   case Routes.initialRoute:
-    //     return MaterialPageRoute(
-    //       builder: (_) => MultiBlocProvider(
-    //         providers: [
-    //           BlocProvider<GetVersionCubit>(
-    //             create: (context) =>
-    //                 di.getIt<GetVersionCubit>()..shouldUpdate(),
-    //           ),
-    //         ],
-    //         child: const SplashScreen(),
-    //       ),
-    //       // const HomeScreen(),
-    //     );
-    //   case Routes.loginRoute:
-    //     return MaterialPageRoute(
-    //       builder: (_) => BlocProvider<LoginCubit>(
-    //         create: (context) => di.getIt<LoginCubit>(),
-    //         child: const LoginScreen(),
-    //       ),
-    //     );
-    //   case Routes.noInternetRoute:
-    //     return MaterialPageRoute(
-    //       builder: (_) => const NoInternetScreen(),
-    //     );
-    //   case Routes.homeRoute:
-    //     return MaterialPageRoute(
-    //       builder: (_) => BlocProvider<AttendanceCubit>(
-    //         create: (context) => di.getIt<AttendanceCubit>(),
-    //         child: const HomeScreen(),
-    //       ),
-    //     );
-    //   default:
-    //     return undefinedRoute();
-    // }
+    return MaterialPageRoute(builder: (_) {
+      switch (routeSettings.name) {
+        case Routes.initialRoute:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<GetVersionCubit>(
+                create: (context) =>
+                    di.getIt<GetVersionCubit>()..shouldUpdate(),
+              ),
+              BlocProvider<LoginCubit>(
+                create: (context) => di.getIt<LoginCubit>(),
+              ),
+            ],
+            child: const SplashScreen(),
+          );
+        case Routes.loginRoute:
+          return const LoginScreen();
+        case Routes.codeVerificationRoute:
+          return const CodeVerificationScreen();
+        case Routes.homeRoute:
+          return BlocProvider(
+            create: (context) => di.getIt<AttendanceCubit>()
+              ..init(
+                  day: DateTimeModel(
+                          microsecondsSinceEpoch:
+                              DateTime.now().microsecondsSinceEpoch)
+                      .date),
+            child: const HomeScreen(),
+          );
+        // case Routes.noInternetRoute:
+        //   return const NoInternetScreen();
+        default:
+          return undefinedRoute();
+      }
+    }
+        // BlocConsumer<NetworkCheckerBloc, NetworkCheckerState>(
+        //   listener: (context, state) {
+        //     if (state is NetworkConnectedState) {
+        //       if (Navigator.canPop(context)) {
+        //         Navigator.of(context).pop();
+        //       }
+        //     } else if (state is NetworkNotConnectedState) {
+        //       Navigator.of(context).pushNamed(Routes.noInternetRoute);
+        //     }
+        //   },
+        //   builder: (context, state) {
+
+        // },
+        // ),
+        );
   }
 
   static Scaffold undefinedRoute() {

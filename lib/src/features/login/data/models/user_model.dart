@@ -12,18 +12,26 @@ class UserModel extends User {
     required String userPassword,
     String? userGender,
     String? userOffice,
+    String? userPhoneNumber,
+    int? userWorkingHours,
+    int? userRamadanWorkingHours,
+    int? userAnnualVacation,
+    int? userSicknessLeave,
   }) : super(
-          userCode: userCode,
-          userName: userName,
-          userEmail: userEmail,
-          userPassword: userPassword,
-          userGender: userGender,
-          userOffice: userOffice,
-        );
+            userCode: userCode,
+            userName: userName,
+            userEmail: userEmail,
+            userPassword: userPassword,
+            userGender: userGender,
+            userOffice: userOffice,
+            userPhoneNumber: userPhoneNumber,
+            userWorkingHours: userWorkingHours,
+            userRamadanWorkingHours: userRamadanWorkingHours,
+            userAnnualVacation: userAnnualVacation,
+            userSicknessLeave: userSicknessLeave);
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
-  Map<String,dynamic> toJson()=>_$UserModelToJson(this);
-
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

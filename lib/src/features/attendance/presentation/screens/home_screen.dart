@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_template/src/core/utils/app_colors.dart';
 import 'package:project_template/src/core/utils/app_dialogs.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/constant/constant.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../../../../core/widgets/main_screen_padding.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             child: IconButton(
-              onPressed:() async {
+              onPressed: () async {
                 await BlocProvider.of<LoginCubit>(context).logout();
               },
               icon: const Icon(Icons.logout),
@@ -47,6 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
+          selectedItemColor: AppColors.primary,
+          unselectedItemColor: Colors.black,
+          showUnselectedLabels: true,
           items: mainScreens
               .map((mainScreen) => BottomNavigationBarItem(
                     label: mainScreen.screenName,
@@ -59,6 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
         ),
-        body: mainScreens[currentIndex].screen);
+        body: IndexedStack(
+          index: currentIndex,
+          children: mainScreens.map((e) => e.screen).toList(),
+        ));
   }
 }

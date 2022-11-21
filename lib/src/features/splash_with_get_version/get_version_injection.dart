@@ -17,6 +17,7 @@ void initGetVersionInjection()  {
   ///Repositories
   getIt.registerLazySingleton<GetVersionRepo>(() => GetVersionRepoImpl(
         getVersionDataSourceImpl: getIt(),
+        networkInfo: getIt(),
       ));
 
   ///DataSources

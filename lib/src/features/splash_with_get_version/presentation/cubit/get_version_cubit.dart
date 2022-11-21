@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constant/constant.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/useCases/usecase.dart';
 import '../../domain/usecases/get_version_use_case.dart';
@@ -21,7 +22,10 @@ class GetVersionCubit extends Cubit<GetVersionState> {
     emit(GetVersionLoading());
     final Either<Failure, bool> response =
         await getVersionUseCaseImpl.call(NoParams());
-    response.fold((failure) => emit(GetVersionFailed()), (shouldUpdate) {
+    response.fold(
+        (failure) =>
+            emit(GetVersionFailed(Constant.mapFailureToString(failure))),
+        (shouldUpdate) {
       if (shouldUpdate) {
         _gotUpdate = true;
         emit(VersionIsUpToDate());

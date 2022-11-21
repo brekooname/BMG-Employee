@@ -33,7 +33,7 @@ class LoginDataSourceImpl implements LoginDataSource {
 
     if (document != null) {
       ///check if userData is correct
-      UserModel user = UserModel.fromJson(document);
+      UserModel user = UserModel.fromJson(document.map);
       if (user.userCode == userModel.userCode) {
         if (user.userPassword == userModel.userPassword) {
           if (shouldStayLogin) {
@@ -64,7 +64,7 @@ class LoginDataSourceImpl implements LoginDataSource {
           documentPath: '${AppStrings.colUsers}/${userModel.userCode}');
       if (doc != null) {
         ///check if userData is correct
-        UserModel user = UserModel.fromJson(doc);
+        UserModel user = UserModel.fromJson(doc.map);
         if (user.userPassword == userModel.userPassword) {
           return right(user);
         }

@@ -1,4 +1,6 @@
 
+import 'package:firedart/firestore/models.dart';
+
 import '../../../../core/firebase/firebase_firestore_repository.dart';
 import '../../../../core/utils/app_strings.dart';
 
@@ -12,9 +14,9 @@ class GetVersionDataSourceImpl implements GetVersionDataSource {
   GetVersionDataSourceImpl({required this.firebaseRepository});
   @override
   Future<int?> shouldUpdate() async {
-    final List<Map<String, dynamic>>? data =
+    final  List<Document>? data =
         await firebaseRepository.fetchDocuments(collectionPath: AppStrings.colVersionControl);
     if (data == null) return null;
-    return data.first[AppStrings.varCurrentVersion];
+    return data.first.map[AppStrings.varCurrentVersion];
   }
 }

@@ -17,6 +17,7 @@ void initLoginInjection()  {
   ///Repositories
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepoImpl(
         loginDataSourceImpl: getIt(),
+        networkInfo: getIt(),
       ));
 
   ///DataSources

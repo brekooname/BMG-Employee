@@ -11,10 +11,10 @@ class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
 
-class LogingSuccess extends LoginState {
+class LoginSuccess extends LoginState {
   final User user;
 
-  const LogingSuccess(this.user);
+  const LoginSuccess(this.user);
   @override
   List<Object> get props => [user];
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_template/src/core/constant/constant.dart';
 import 'package:project_template/src/core/utils/media_query_values.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/shared/shared.dart';
 import '../../../../core/utils/app_dialogs.dart';
 import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/widgets/vertical_sized_box.dart';
 import '../../../login/domain/entities/user.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../cubit/get_version_cubit.dart';
@@ -81,7 +81,9 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           BlocListener<GetVersionCubit, GetVersionState>(
             listener: (context, state) {
-              if (state is VersionIsFine) {
+              if (state is GetVersionFailed) {
+                AppDialogs.appSnackBar(context: context, text: state.message);
+              } else if (state is VersionIsFine) {
                 _nextTo();
               } else if (state is VersionIsUpToDate) {
                 _upToDate();
@@ -102,6 +104,12 @@ class _SplashScreenState extends State<SplashScreen> {
                         ImgAssets.bmgIcon,
                       )),
                 ),
+                const VerticalSizedBox(),
+                if(state is GetVersionFailed)IconButton(onPressed: ()async{
+                    await BlocProvider.of<GetVersionCubit>(context).shouldUpdate();
+                }, icon: const Icon(Icons.replay_outlined))
+
+                
               ],
             );
           },

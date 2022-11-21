@@ -9,17 +9,15 @@ class MainScreenPadding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: (context.width >= minSize.width)
-              ? EdgeInsets.all(context.paddingAllWindows)
-              : EdgeInsets.all(context.paddingAll),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children:children ,
-              ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: (context.width >= minSize.width)
+            ? EdgeInsets.all(context.paddingAllWindows)
+            : EdgeInsets.all(context.paddingAll),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: children,
         ),
       ),
     );
